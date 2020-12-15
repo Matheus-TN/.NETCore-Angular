@@ -2,7 +2,7 @@
   <div class='col-sm-6' *ngIf='professorSelecionado'>
     <div class="row">
       <div class="mr-auto">
-        <app-titulo [titulo]="'Cód.Professor: '+professorSelecionado.id"></app-titulo>
+        <app-titulo [titulo]="(professorSelecionado.id === 0 ? 'Novo Professor' : 'Cód.Professor: ' + professorSelecionado.id)"></app-titulo>
       </div>
       <div class="mt-1">
         <button class="btn btn-outline-danger" (click)='voltar()'>Fechar</button>
@@ -13,16 +13,17 @@
         <label for='formGroupExampleInput'>Nome</label>
         <input type="text" formControlName='nome' class="form-control">
       </div>
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for='formGroupExampleInput2'>Disciplina</label>
         <input type="text" formControlName='disciplina' class="form-control">
-      </div>
+      </div> -->
       <hr>
-      <button class="btn btn-success" [disabled]='!professorForm.valid'>Enviar</button>
+      <button class="btn btn-success" [disabled]='!professorForm.valid'>Salvar</button>
     </form>
   </div>
   <div [ngClass]="{'col-sm-6' : true, 'col-sm-12' : !professorSelecionado}">
     <app-titulo [titulo]='professorTitle'></app-titulo>
+      <button class="btn btn-outline-success" (click)='professorNovo()'>Cadastrar Professor</button>
     <table class="table table-striped table-hover">
       <thead>
         <tr>
@@ -41,7 +42,7 @@
           <td>{{professor.disciplina}}</td>
           <td class="btn-group">
             <button (click)="openModal(template)" class="btn btn-sm btn-outline-primary">Alunos</button>
-            <button class="btn btn-sm btn-outline-danger">Excluir</button>
+            <button class="btn btn-sm btn-outline-danger" (click)='deletarProfessor(professor.id)'>Deletar</button>
           </td>
         </tr>
       </tbody>

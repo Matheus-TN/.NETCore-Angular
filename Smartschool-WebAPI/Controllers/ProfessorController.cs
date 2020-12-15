@@ -110,7 +110,7 @@ namespace Smartschool_WebAPI.Controllers
 
                if( await this.repo.SaveChangesAsync()) 
                {
-                    return Ok("Deletado");
+                    return Ok(new { message = "Deletado" });
                }
             }
             catch (System.Exception)
